@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
@@ -40,8 +39,7 @@ void main() {
     expect(mockOnPressedFunction.called, 1);
   });
 
-  testWidgets('should show progress indicator when in loading state',
-      (tester) async {
+  testWidgets('should show progress indicator when in loading state', (tester) async {
     final btnController = RoundedLoadingButtonController();
 
     await tester.pumpWidget(Directionality(
@@ -117,8 +115,7 @@ void main() {
     expect(find.text('Tap me!'), findsOneWidget);
   });
 
-  testWidgets('should not show progress indicator when in idle state',
-      (tester) async {
+  testWidgets('should not show progress indicator when in idle state', (tester) async {
     final btnController = RoundedLoadingButtonController();
 
     await tester.pumpWidget(Directionality(

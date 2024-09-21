@@ -84,8 +84,7 @@ class RoundedLoadingButton extends StatefulWidget {
   State<StatefulWidget> createState() => RoundedLoadingButtonState();
 }
 
-class RoundedLoadingButtonState extends State<RoundedLoadingButton>
-    with TickerProviderStateMixin {
+class RoundedLoadingButtonState extends State<RoundedLoadingButton> with TickerProviderStateMixin {
   late AnimationController _buttonController;
   late AnimationController _borderController;
   late AnimationController _checkButtonControler;
@@ -104,8 +103,7 @@ class RoundedLoadingButtonState extends State<RoundedLoadingButton>
         alignment: FractionalOffset.center,
         decoration: BoxDecoration(
           color: widget.successColor ?? theme.primaryColor,
-          borderRadius:
-              BorderRadius.all(Radius.circular(_bounceAnimation.value / 2)),
+          borderRadius: BorderRadius.all(Radius.circular(_bounceAnimation.value / 2)),
         ),
         width: _bounceAnimation.value,
         height: _bounceAnimation.value,
@@ -120,8 +118,7 @@ class RoundedLoadingButtonState extends State<RoundedLoadingButton>
         alignment: FractionalOffset.center,
         decoration: BoxDecoration(
           color: widget.errorColor,
-          borderRadius:
-              BorderRadius.all(Radius.circular(_bounceAnimation.value / 2)),
+          borderRadius: BorderRadius.all(Radius.circular(_bounceAnimation.value / 2)),
         ),
         width: _bounceAnimation.value,
         height: _bounceAnimation.value,
@@ -136,16 +133,14 @@ class RoundedLoadingButtonState extends State<RoundedLoadingButton>
         height: widget.loaderSize,
         width: widget.loaderSize,
         child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(widget.valueColor),
-            strokeWidth: widget.loaderStrokeWidth));
+            valueColor: AlwaysStoppedAnimation<Color>(widget.valueColor), strokeWidth: widget.loaderStrokeWidth));
 
     final childStream = StreamBuilder(
       stream: _state,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return AnimatedSwitcher(
             duration: Duration(milliseconds: 200),
-            child:
-                snapshot.data == LoadingState.loading ? _loader : widget.child);
+            child: snapshot.data == LoadingState.loading ? _loader : widget.child);
       },
     );
 
@@ -160,7 +155,7 @@ class RoundedLoadingButtonState extends State<RoundedLoadingButton>
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(widget.borderRadius),
             ),
-            primary: widget.color,
+            backgroundColor: widget.color,
             elevation: widget.elevation,
           ),
           onPressed: widget.onPressed == null ? null : _btnPressed,
@@ -181,25 +176,20 @@ class RoundedLoadingButtonState extends State<RoundedLoadingButton>
   void initState() {
     super.initState();
 
-    _buttonController =
-        AnimationController(duration: widget.duration, vsync: this);
+    _buttonController = AnimationController(duration: widget.duration, vsync: this);
 
-    _checkButtonControler = AnimationController(
-        duration: Duration(milliseconds: 1000), vsync: this);
+    _checkButtonControler = AnimationController(duration: Duration(milliseconds: 1000), vsync: this);
 
-    _borderController =
-        AnimationController(duration: widget._borderDuration, vsync: this);
+    _borderController = AnimationController(duration: widget._borderDuration, vsync: this);
 
-    _bounceAnimation = Tween<double>(begin: 0, end: widget.height).animate(
-        CurvedAnimation(
-            parent: _checkButtonControler, curve: Curves.elasticOut));
+    _bounceAnimation = Tween<double>(begin: 0, end: widget.height)
+        .animate(CurvedAnimation(parent: _checkButtonControler, curve: Curves.elasticOut));
     _bounceAnimation.addListener(() {
       setState(() {});
     });
 
     _squeezeAnimation = Tween<double>(begin: widget.width, end: widget.height)
-        .animate(
-            CurvedAnimation(parent: _buttonController, curve: widget.curve));
+        .animate(CurvedAnimation(parent: _buttonController, curve: widget.curve));
 
     _squeezeAnimation.addListener(() {
       setState(() {});
@@ -211,10 +201,9 @@ class RoundedLoadingButtonState extends State<RoundedLoadingButton>
       }
     });
 
-    _borderAnimation = BorderRadiusTween(
-            begin: BorderRadius.circular(widget.borderRadius),
-            end: BorderRadius.circular(widget.height))
-        .animate(_borderController);
+    _borderAnimation =
+        BorderRadiusTween(begin: BorderRadius.circular(widget.borderRadius), end: BorderRadius.circular(widget.height))
+            .animate(_borderController);
 
     _borderAnimation.addListener(() {
       setState(() {});
@@ -277,12 +266,8 @@ class RoundedLoadingButtonController {
   late VoidCallback _errorListener;
   late VoidCallback _resetListener;
 
-  void _addListeners(
-      VoidCallback startListener,
-      VoidCallback stopListener,
-      VoidCallback successListener,
-      VoidCallback errorListener,
-      VoidCallback resetListener) {
+  void _addListeners(VoidCallback startListener, VoidCallback stopListener, VoidCallback successListener,
+      VoidCallback errorListener, VoidCallback resetListener) {
     _startListener = startListener;
     _stopListener = stopListener;
     _successListener = successListener;
